@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html, body { min-height: 100%; }
+body { margin: 0; min-width: 320px; background: #0b1220; }
+button, input, select { font: inherit; }
+
+@layer components {
+  /* Tarjetas tipo vidrio esmerilado, legibles sobre cualquier fondo. */
+  .vidrio {
+    @apply min-w-0 rounded-3xl border border-white/15 bg-slate-950/25 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-xl;
+  }
+  .vidrio-suave {
+    @apply rounded-2xl border border-white/10 bg-white/8 backdrop-blur-md;
+  }
+  .etiqueta {
+    @apply text-xs font-semibold tracking-[0.14em] text-white/60 uppercase;
+  }
+  .boton-icono {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-slate-950/25 text-white backdrop-blur-xl transition hover:bg-white/15 focus-visible:ring-4 focus-visible:ring-white/25 focus-visible:outline-none disabled:opacity-50;
+  }
+  .texto-sombra { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35); }
+}
+
+/* ---------- Transición del fondo ---------- */
+.fondo-entrada { animation: fondo-entrada 1.2s ease-out both; }
+@keyframes fondo-entrada { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Nubes ---------- */
+.nube {
+  left: 0;
+  width: 320px;
+  height: 96px;
+  border-radius: 999px;
+  background: var(--color-nube);
+  filter: blur(5px);
+  scale: var(--escala, 1);
+  animation-name: nube-deriva;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.nube::before,
+.nube::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+.nube::before { width: 140px; height: 140px; top: -70px; left: 46px; }
+.nube::after { width: 180px; height: 180px; top: -100px; right: 38px; }
+@keyframes nube-deriva {
+  from { translate: -60vw 0; }
+  to { translate: 120vw 0; }
+}
+
+/* ---------- Sol ---------- */
+.sol-rayos {
+  background: repeating-conic-gradient(rgba(255, 236, 170, 0.22) 0deg 5deg, transparent 5deg 15deg);
+  mask-image: radial-gradient(circle, #000 25%, transparent 68%);
+  animation: girar 80s linear infinite;
+}
+.sol-halo {
+  background: radial-gradient(circle, rgba(255, 214, 102, 0.55) 0%, rgba(255, 190, 70, 0.15) 45%, transparent 70%);
+  animation: latido 6s ease-in-out infinite;
+}
+@keyframes girar { to { rotate: 360deg; } }
+@keyframes latido {
+  0%, 100% { scale: 1; opacity: 0.9; }
+  50% { scale: 1.08; opacity: 1; }
+}
+
+/* ---------- Luna ---------- */
+.luna {
+  background:
+    radial-gradient(circle at 30% 35%, rgba(148, 163, 184, 0.35) 0 9%, transparent 10%),
+    radial-gradient(circle at 62% 58%, rgba(148, 163, 184, 0.3) 0 12%, transparent 13%),
+    radial-gradient(circle at 45% 75%, rgba(148, 163, 184, 0.25) 0 6%, transparent 7%),
+    radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 55%, #b6c2d4 100%);
+  box-shadow: 0 0 60px 12px rgba(226, 232, 255, 0.35);
+}
+
+/* ---------- Relámpagos ---------- */
+.relampago { animation: destello 7s infinite; }
+.relampago::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  animation: destello 11s 3s infinite;
+}
+@keyframes destello {
+  0%, 86%, 100% { background: transparent; }
+  87% { background: rgba(225, 230, 255, 0.55); }
+  88% { background: transparent; }
+  90% { background: rgba(225, 230, 255, 0.35); }
+  92% { background: transparent; }
+}
+
+/* ---------- Niebla ---------- */
+.niebla-capa {
+  left: -50%;
+  width: 200%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.15) 45%, transparent 70%);
+  filter: blur(24px);
+  animation-name: niebla;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes niebla {
+  from { translate: -12% 0; }
+  to { translate: 12% 0; }
+}
+
+/* ---------- Varios ---------- */
+.aparecer { animation: aparecer 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes aparecer {
+  from { opacity: 0; translate: 0 14px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.sin-barra { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.25) transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+}

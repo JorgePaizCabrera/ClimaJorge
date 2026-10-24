@@ -23,9 +23,16 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
+// Guarda el aviso de instalación de Chrome/Edge apenas llega, antes de que cargue React.
+// Si la página sale del caché, el navegador lo lanza tan rápido que el botón no alcanza a escucharlo.
+const CAPTURAR_INSTALACION = `window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__eventoInstalacion=e;window.dispatchEvent(new Event('instalacion-disponible'));});`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={inter.variable}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: CAPTURAR_INSTALACION }} />
+      </head>
       <body className="font-sans antialiased">
         {children}
         <RegistrarSW />

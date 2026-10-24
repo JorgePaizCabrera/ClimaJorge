@@ -1,58 +1,46 @@
 # Atmósfera - App del clima
 
-Atmósfera es una aplicación web progresiva (PWA) para consultar el clima. Se puede buscar
-cualquier ciudad o usar la ubicación actual, y muestra el clima del momento, el pronóstico
-de las próximas 24 horas y el de los próximos 7 días.
-
-El fondo de la app cambia según el clima: sale el sol cuando está despejado, gotas cuando
-llueve, relámpagos cuando hay tormenta, nieve, niebla, y la luna con estrellas en la noche.
-
-Como es una PWA, se puede instalar en la computadora como si fuera una aplicación normal y
-también abre sin internet mostrando los últimos datos que se descargaron.
+App web progresiva (PWA) para ver el clima actual, el pronóstico de 24 horas y de 7 días
+de cualquier ciudad o de tu ubicación. El fondo cambia según el clima (sol, lluvia,
+tormenta, nieve, niebla y noche). Se puede instalar como app y abre sin internet con los
+últimos datos guardados.
 
 ## Frameworks
 
-- **Next.js** (con React) para el frontend
-- **Express** (con Node.js) para el backend
+- Next.js (frontend)
+- Express (backend)
 
 ## Herramientas
 
 - TypeScript
-- Tailwind CSS para los estilos
-- Lucide para los íconos
-- API de Open-Meteo para los datos del clima (es gratis y no necesita API key)
+- Tailwind CSS
+- Lucide (íconos)
+- Open-Meteo (datos del clima)
 
-## Cómo instalarla
+## Instalación
 
-Hay que tener instalado **Node.js 20 o superior**.
+Necesitas Node.js 20 o superior.
 
-1. Clonar el repositorio y entrar a la carpeta:
+```bash
+git clone https://github.com/JorgePaizCabrera/ClimaJorge.git
+cd ClimaJorge
+npm run instalar
+```
 
-   ```bash
-   git clone https://github.com/TU_USUARIO/clima-pwa.git
-   cd clima-pwa
-   ```
+## Modo local
 
-2. Instalar las dependencias:
+```bash
+npm run dev
+```
 
-   ```bash
-   npm run instalar
-   ```
+Abre http://localhost:3000
 
-3. Ejecutar la app:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Abrir en el navegador: **http://localhost:3000**
-
-Para poder instalarla como app y probar que funciona sin internet, hay que ejecutarla
-en modo producción en lugar del paso 3:
+## Modo producción
 
 ```bash
 npm run build
 npm start
 ```
 
-Después de eso, en Chrome o Edge aparece el botón **Instalar** en la barra de direcciones.
+Abre http://localhost:3000 y verás un botón verde que dice Instalar en la parte
+superior izquierda para instalar la app.
